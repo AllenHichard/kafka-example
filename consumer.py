@@ -17,3 +17,8 @@ class Consumer:
     def list_messages_by_consumer(self, consumer):
         for messages in consumer:
             print(messages.value.decode('utf-8'))
+
+
+consumer = Consumer()
+client = consumer.create_kafka_consumer('chat')
+consumer.list_messages_by_consumer(client)

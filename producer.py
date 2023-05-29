@@ -15,3 +15,9 @@ class Producer:
 
     def close_producer(self, producer):
         producer.close()
+
+
+producer = Producer()
+prod = producer.create_kafka_producer()
+producer.send_message_to_topic(producer=prod, topic="chat", message="sync")
+producer.close_producer(prod)
