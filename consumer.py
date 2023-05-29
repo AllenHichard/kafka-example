@@ -9,6 +9,7 @@ class Consumer:
 
     def create_kafka_consumer(self, topic):
         consumer = KafkaConsumer(topic, bootstrap_servers=self.bootstrap_servers)
+        return consumer
 
     def close_consumer(self, consumer):
         consumer.close()

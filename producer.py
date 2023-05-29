@@ -8,12 +8,10 @@ class Producer:
 
     def create_kafka_producer(self):
         producer = KafkaProducer(bootstrap_servers=self.bootstrap_servers)
+        return producer
 
     def send_message_to_topic(self, producer, topic, message):
         producer.send(topic, message.encode('utf-8'))
 
-
     def close_producer(self, producer):
         producer.close()
-
-
