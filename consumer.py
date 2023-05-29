@@ -1,14 +1,18 @@
 from kafka import KafkaConsumer
+from enviroments import env
 
-# Configurar o endereço do servidor Kafka
-bootstrap_servers = 'localhost:9092'
 
-# Criar um consumidor Kafka
-consumer = KafkaConsumer('meu-topico', bootstrap_servers=bootstrap_servers)
+class Consumer:
 
-# Ler e imprimir as mensagens do tópico
-for mensagem in consumer:
-    print(mensagem.value.decode('utf-8'))
+    def __init__(self):
+        self.bootstrap_servers = env.bootstrap_servers
 
-# Fechar a conexão do consumidor Kafka
-consumer.close()
+    def create_kafka_consumer(self, topic):
+        consumer = KafkaConsumer(topic, bootstrap_servers=self.bootstrap_servers)
+
+    def close_consumer(self, consumer):
+        consumer.close()
+
+    def list_messages_by_consumer(self, consumer):
+        for messages in consumer:
+            print(messages.value.decode('utf-8'))

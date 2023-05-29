@@ -1,19 +1,19 @@
 from kafka import KafkaProducer
+from enviroments import env
 
-# Configurar o endereço do servidor Kafka
-bootstrap_servers = 'localhost:9092'
 
-# Criar um produtor Kafka
-producer = KafkaProducer(bootstrap_servers=bootstrap_servers)
+class Producer:
+    def __init__(self):
+        self.bootstrap_servers = env.bootstrap_servers
 
-# Definir o tópico para o qual você deseja enviar mensagens
-topic = 'meu-topico'
+    def create_kafka_producer(self):
+        producer = KafkaProducer(bootstrap_servers=self.bootstrap_servers)
 
-# Enviar mensagens para o tópico
-for i in range(10):
-    mensagem = 'Mensagem {}'.format(i)
-    print("send", mensagem)
-    producer.send(topic, mensagem.encode('utf-8'))
+    def send_message_to_topic(self, producer, topic, message):
+        producer.send(topic, message.encode('utf-8'))
 
-# Fechar a conexão do produtor Kafka
-producer.close()
+
+    def close_producer(self, producer):
+        producer.close()
+
+
